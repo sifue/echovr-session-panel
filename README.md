@@ -7,6 +7,7 @@ This tool is for PC edition EchoVR. By launching this tool, you can view the sco
 See [https://github.com/Ajedi32/echovr_api_docs#sessionid](https://github.com/Ajedi32/echovr_api_docs#sessionid).
 
 ### Dev
+Install Node.js (Upper v14.16.0). As follows.
 
 ```
 npm i
