@@ -1,7 +1,10 @@
 # EchoVR Session Panel
 This tool is for PC edition EchoVR. By launching this tool, you can view the score of the current match and the stats of the players of the team. It is a green background because it is intended to be synthesized with OBS chroma key.
 
+![sample.png](./sample.png)
 
+# API Document
+See [https://github.com/Ajedi32/echovr_api_docs#sessionid](https://github.com/Ajedi32/echovr_api_docs#sessionid).
 
 ### Dev
 

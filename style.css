@@ -15,15 +15,12 @@ table.score {
     border-spacing: 0;
     table-layout: fixed;
     height: 100px;
-    vertical-align: top
-}
-
-table.score th {
-    text-align: center;
+    
 }
 
 table.score td {
     text-align: center;
+    vertical-align: top
 }
 
 #game-clock-display {
