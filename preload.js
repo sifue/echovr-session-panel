@@ -19,6 +19,8 @@ function zeroPaddingString(n) {
  * @param {*} sessionData see https://github.com/Ajedi32/echovr_api_docs
  */
 function renderHTML(sessionData) {
+  document.getElementById('container').style.display = 'block'; // show Table
+
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector);
     if (element) element.innerText = text;
@@ -91,6 +93,5 @@ function renderHTML(sessionData) {
     document.getElementById('b-st-' + i).innerText = p.stuns;
     document.getElementById('b-pn-' + i).innerText = p.ping;
   }
-
 
 }
