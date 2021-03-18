@@ -1,44 +1,44 @@
 body {
     background: #32cd32;
     color: #eee;
-    font-family: "Arial", "メイリオ";
+    font-family: "Arial";
+    font-weight: bold;
+    text-shadow: 1px 1px 0px #444;
+    vertical-align: top
 }
 
 table.score {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    border: solid 1px #eee;
+    height: 100px;
 }
 
 table.score th {
     text-align: center;
-    padding: 7px 0;
-    border: solid 2px #eee;
+    padding: 5px;
 }
 
 table.score td {
     text-align: center;
-    padding: 7px 0;
-    border: solid 1px #eee;
-    width: 155px;
+    padding: 5px;
 }
 
 #game-clock-display {
-    font-size: 40px;
-    font-weight: bold;
+    font-size: 20px;
+    border: solid 1px #eee;
 }
 
 #orange-points {
     color : #ff8b00;
-    font-size: 60px;
-    font-weight: bold;
+    font-size: 40px;
+    border: solid 1px #eee;
 }
 
 #blue-points {
     color : #009afe;
-    font-size: 60px;
-    font-weight: bold;
+    font-size: 40px;
+    border: solid 1px #eee;
 }
 
 table.stats {
@@ -46,9 +46,8 @@ table.stats {
     border-spacing: 0;
     table-layout: fixed;
     border: solid 1px #eee;
-    font-size: 12px;
-    font-weight: bold;
-    margin: 4px;
+    font-size: 14px;
+    margin: 2px;
 }
 
 table.stats th {
@@ -63,3 +62,6 @@ table.stats td {
     border: solid 1px #eee;
 }
 
+table.stats td.nm {
+    text-align: left;
+}
