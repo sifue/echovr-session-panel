@@ -18,11 +18,19 @@ function setup() {
   app.stage.addChild(map);
 }
 
+let fetchURL = 'http://127.0.0.1:6721/session';
+
+require('electron').ipcRenderer.on('settingURL', (event, message) => {
+  fetchURL = message;
+  console.log('fetchURL: ' + fetchURL);
+});
+
 window.addEventListener('DOMContentLoaded', () => {
   setInterval(function () {
-    fetch('http://127.0.0.1:6721/session')
+    fetch(fetchURL)
       .then((response) => response.json())
-      .then((data) => renderHTML(data));
+      .then((data) => renderHTML(data))
+      .catch(console.error);
   }, 1000);
 
   document.getElementById('map').appendChild(app.view);
@@ -78,7 +86,7 @@ function renderScoreborad(sessionData) {
   replaceText('blue-points', zeroPaddingString(blue_points));
 
   // ORANGE TEAM STATS
-  const empty_player =  {
+  const empty_player = {
     no: '',
     name: '',
     possession_time: '',

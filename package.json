@@ -1,6 +1,6 @@
 {
   "name": "echovr-session-panel",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Panel UI for EchoVR session API.",
   "main": "main.js",
   "scripts": {
@@ -28,6 +28,7 @@
     }
   },
   "dependencies": {
+    "electron-prompt": "^1.6.2",
     "electron-squirrel-startup": "^1.0.0",
     "pixi.js": "^6.0.0"
   },
