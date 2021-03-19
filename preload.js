@@ -30,8 +30,7 @@ function renderHTML(sessionData) {
   replaceText('sessionid', sessionid);
 
   const game_status = sessionData.game_status;
-
-  if (!game_status) {
+  if (!game_status) { // if it isn't in game. not render.
     return;
   }
 
@@ -46,52 +45,52 @@ function renderHTML(sessionData) {
 
   const orange_team = sessionData.teams[1].players.map((p) => {
     return {
-      level: p.level,
+      no: zeroPaddingString(p.number),
       name: p.name,
       point: p.stats.points,
       assists: p.stats.assists,
       saves: p.stats.saves,
       stuns: p.stats.stuns,
-      ping: p.ping
+      ping: p.ping,
+      level: p.level
     };
   });
-
   for (let i = 0; i < 5; i++) {
     let p = orange_team[i];
-    if (!p) p = { level: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '' };
-    document.getElementById('o-lv-' + i).innerText = p.level;
+    if (!p) p = { no: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '', level: '' };
+    document.getElementById('o-no-' + i).innerText = p.no;
     document.getElementById('o-nm-' + i).innerText = p.name;
     document.getElementById('o-pt-' + i).innerText = p.point;
     document.getElementById('o-as-' + i).innerText = p.assists;
     document.getElementById('o-sv-' + i).innerText = p.saves;
     document.getElementById('o-st-' + i).innerText = p.stuns;
     document.getElementById('o-pn-' + i).innerText = p.ping;
+    document.getElementById('o-lv-' + i).innerText = p.level;
   }
 
   const blue_team = sessionData.teams[0].players.map((p) => {
     return {
-      level: p.level,
+      no: zeroPaddingString(p.number),
       name: p.name,
       point: p.stats.points,
       assists: p.stats.assists,
       saves: p.stats.saves,
       stuns: p.stats.stuns,
-      ping: p.ping
+      ping: p.ping,
+      level: p.level
     };
   });
-
-  console.log(blue_team);
-
   for (let i = 0; i < 5; i++) {
     let p = blue_team[i];
-    if (!p) p = { level: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '' };
-    document.getElementById('b-lv-' + i).innerText = p.level;
+    if (!p) p =  { no: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '', level: '' };
+    document.getElementById('b-no-' + i).innerText = p.no;
     document.getElementById('b-nm-' + i).innerText = p.name;
     document.getElementById('b-pt-' + i).innerText = p.point;
     document.getElementById('b-as-' + i).innerText = p.assists;
     document.getElementById('b-sv-' + i).innerText = p.saves;
     document.getElementById('b-st-' + i).innerText = p.stuns;
     document.getElementById('b-pn-' + i).innerText = p.ping;
+    document.getElementById('b-lv-' + i).innerText = p.level;
   }
 
 }

@@ -4,6 +4,7 @@ This tool is for PC edition EchoVR. By launching this tool, you can view the sco
 ![sample.png](./sample.png)
 
 # API Document
+Enable API in EchoVR.
 See [https://github.com/Ajedi32/echovr_api_docs#sessionid](https://github.com/Ajedi32/echovr_api_docs#sessionid).
 
 ### Dev

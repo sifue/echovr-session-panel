@@ -2,7 +2,6 @@ body {
     background: #32cd32;
     color: #eee;
     font-family: "Arial";
-    font-weight: bold;
     text-shadow: 1px 1px 0px #444;
 }
 
@@ -15,42 +14,44 @@ table.score {
     border-spacing: 0;
     table-layout: fixed;
     height: 100px;
-    
 }
 
 table.score td {
     text-align: center;
-    vertical-align: top
+    vertical-align: center;
 }
 
 #game-clock-display {
     font-size: 20px;
     padding: 5px;
-    border: solid 1px #eee;
+    border: solid 2px #eee;
     vertical-align: center;
+    font-weight: bold;
 }
 
 #orange-points {
     color : #ff8b00;
     font-size: 40px;
     padding: 5px;
-    border: solid 1px #eee;
+    border: solid 2px #eee;
     vertical-align: center;
+    font-weight: bold;
 }
 
 #blue-points {
     color : #009afe;
     font-size: 40px;
     padding: 5px;
-    border: solid 1px #eee;
+    border: solid 2px #eee;
     vertical-align: center;
+    font-weight: bold;
 }
 
 table.stats {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    border: solid 1px #eee;
+    border: solid 2px #eee;
     font-size: 14px;
     margin: 0px 2px 0px 2px;
 }
@@ -59,12 +60,13 @@ table.stats th {
     text-align: center;
     padding: 2px;
     border: solid 2px #eee;
+    font-weight: bold;
 }
 
 table.stats td {
     text-align: center;
     padding: 2px;
-    border: solid 1px #eee;
+    border: solid 2px #eee;
 }
 
 table.stats td.nm {
