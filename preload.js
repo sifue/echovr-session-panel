@@ -1,6 +1,6 @@
 const PIXI = require('pixi.js');
-const ARENA_WIDTH = 800;
-const ARENA_HEIGHT = 300;
+const ARENA_WIDTH = 640;
+const ARENA_HEIGHT = 258;
 const CENTER_X = ARENA_WIDTH / 2;
 const CENTER_Y = ARENA_HEIGHT / 2;
 
@@ -14,8 +14,10 @@ const app = new PIXI.Application({
 app.loader
 .add('echo-arena.png')
 .load(setup);
+
 function setup() {
-  //This code will run when the loader has finished loading the image
+  let map = new PIXI.Sprite(app.loader.resources['echo-arena.png'].texture);
+  app.stage.addChild(map);
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -152,7 +154,8 @@ function renderScoreborad(sessionData) {
   }
 }
 
-const graphics = new PIXI.Graphics();
+let graphicses = [];
+let texts = [];
 
 /**
  * render Map with session API Data
@@ -166,17 +169,17 @@ function renderMap(sessionData) {
     return;
   }
 
-  graphics.clear();
-
-  let map = new PIXI.Sprite(app.loader.resources['echo-arena.png'].texture);
-
-  app.stage.addChild(map);
-
+  graphicses.forEach((g) => {g.clear();});
+  graphicses.clear = [];
+  texts.forEach((t) => {t.destroy();});
+  texts = [];
 
   // position : [x, y, z]
   // <- +z, A -x, V +x. -> -z
   // Areana z: -50 ~ + 50,  x -20 ~ +20
-  const SCALE = 8; // scale of position to pixi 
+  const SCALE = 8; // scale of position to pixi
+  const TEXT_SIZE = 18; 
+  const TEXT_OFFSET = 1;
 
   // ORANGE TEAM
   const orange_team_players = sessionData.teams[1].players.map((p) => {
@@ -184,43 +187,60 @@ function renderMap(sessionData) {
       no: zeroPaddingString(p.number),
       possession: p.possession,
       position: p.head.position,
+      team: 'ORANGE'
     };
   });
-  for (const p of orange_team_players) {
-    const p_x = CENTER_X  - (p.position[2] * SCALE);
-    const p_y = CENTER_Y  + (p.position[0] * SCALE);
-    graphics.lineStyle(0);
-    graphics.beginFill(0xff8b00, 1);
-    graphics.drawCircle(p_x, p_y, 8);
-    graphics.endFill();
-  }
-
   // BLUE TEAM
   const blue_team_players = sessionData.teams[0].players.map((p) => {
     return {
       no: zeroPaddingString(p.number),
       possession: p.possession,
       position: p.head.position,
+      team: 'BLUE'
     };
   });
-  for (const p of blue_team_players) {
+
+  // TEAM PLAYERS
+  const team_players = orange_team_players.concat(blue_team_players);
+  for (const p of team_players) {
     const p_x = CENTER_X  - (p.position[2] * SCALE);
     const p_y = CENTER_Y  + (p.position[0] * SCALE);
-    graphics.lineStyle(0);
-    graphics.beginFill(0x009afe, 1);
-    graphics.drawCircle(p_x, p_y, 8);
+
+    const graphics = new PIXI.Graphics();
+    if (p.possession) {
+      graphics.lineStyle(5,0xffffff);
+    } else {
+      graphics.lineStyle(0);
+    }
+
+    if (p.team === 'ORANGE') {
+      graphics.beginFill(0xff8b00, 1);
+    } else {
+      graphics.beginFill(0x009afe, 1);
+    }
+    
+    graphics.drawCircle(p_x, p_y, 16);
     graphics.endFill();
+    app.stage.addChild(graphics);
+    graphicses.push(graphics);
+
+    const text = new PIXI.Text(p.no, {fontFamily : 'Arial', fontSize: TEXT_SIZE, fill : 0xffffff, align : 'center'});
+    text.x = p_x - (TEXT_SIZE / 2) - TEXT_OFFSET;
+    text.y = p_y - (TEXT_SIZE / 2) - TEXT_OFFSET;
+    app.stage.addChild(text);
+    texts.push(text);
   }
 
   // DISC
   const disc_position = sessionData.disc.position; // [x, y, z]
   const disc_x = CENTER_X - (disc_position[2] * SCALE);
   const disc_y = CENTER_Y + (disc_position[0] * SCALE);
-  // console.log(disc_position);
+  const graphics = new PIXI.Graphics();
   graphics.lineStyle(0);
   graphics.beginFill(0xffffff, 1);
-  graphics.drawCircle(disc_x, disc_y, 5);
+  graphics.drawCircle(disc_x, disc_y, 8);
   graphics.endFill();
-
   app.stage.addChild(graphics); 
+  graphicses.push(graphics);
+
 }
