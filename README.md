@@ -28,7 +28,7 @@ npx electron-forge import
 npm run make
 ```
 
-Use `out\make\squirrel.windows\x64\echovr-session-panel-1.0.0 Setup.exe`
+Use `out\echovr-session-panel-win32-x64\echovr-session-panel.exe`
 
 # LICENSE
 MIT LICENSE
