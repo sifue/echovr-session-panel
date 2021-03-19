@@ -5,15 +5,15 @@ body {
     text-shadow: 1px 1px 0px #444;
 }
 
-#container {
+/* #container {
     display: none;
-}
+} */
 
 table.score {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    height: 100px;
+    height: 150px;
 }
 
 table.score td {

@@ -1,5 +1,22 @@
 const PIXI = require('pixi.js');
-const app = new PIXI.Application({ width: 516, height: 256 });
+const ARENA_WIDTH = 800;
+const ARENA_HEIGHT = 300;
+const CENTER_X = ARENA_WIDTH / 2;
+const CENTER_Y = ARENA_HEIGHT / 2;
+
+const app = new PIXI.Application({ 
+  width: ARENA_WIDTH, 
+  height: ARENA_HEIGHT,
+  antialias: true,
+  transparent: false
+ });
+
+app.loader
+.add('echo-arena.png')
+.load(setup);
+function setup() {
+  //This code will run when the loader has finished loading the image
+}
 
 window.addEventListener('DOMContentLoaded', () => {
   setInterval(function () {
@@ -30,11 +47,10 @@ function renderHTML(sessionData) {
   renderMap(sessionData);
 }
 
-
 /**
  * render Scoreboard with session API Data
- * @param {*} sessionData 
- * @returns 
+ * @param {*} sessionData
+ * @returns
  */
 function renderScoreborad(sessionData) {
   const replaceText = (selector, text) => {
@@ -46,10 +62,12 @@ function renderScoreborad(sessionData) {
   replaceText('sessionid', sessionid);
 
   const game_status = sessionData.game_status;
-  if (!game_status) { // if it isn't in game. not render.
+  if (!game_status) {
+    // if it isn't in game. not render.
     return;
   }
 
+  // SCORE BOARD
   const game_clock_display = sessionData.game_clock_display.split('.')[0];
   replaceText('game-clock-display', game_clock_display);
 
@@ -59,6 +77,7 @@ function renderScoreborad(sessionData) {
   const blue_points = sessionData.blue_points;
   replaceText('blue-points', zeroPaddingString(blue_points));
 
+  // ORANGE TEAM STATS
   const orange_team = sessionData.teams[1].players.map((p) => {
     return {
       no: zeroPaddingString(p.number),
@@ -68,12 +87,23 @@ function renderScoreborad(sessionData) {
       saves: p.stats.saves,
       stuns: p.stats.stuns,
       ping: p.ping,
-      level: p.level
+      level: p.level,
     };
   });
   for (let i = 0; i < 5; i++) {
     let p = orange_team[i];
-    if (!p) p = { no: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '', level: '' };
+    if (!p)
+      p = {
+        no: '',
+        name: '',
+        point: '',
+        assists: '',
+        assists: '',
+        saves: '',
+        stuns: '',
+        ping: '',
+        level: '',
+      };
     document.getElementById('o-no-' + i).innerText = p.no;
     document.getElementById('o-nm-' + i).innerText = p.name;
     document.getElementById('o-pt-' + i).innerText = p.point;
@@ -84,6 +114,7 @@ function renderScoreborad(sessionData) {
     document.getElementById('o-lv-' + i).innerText = p.level;
   }
 
+  // BLUE TEAM STATS
   const blue_team = sessionData.teams[0].players.map((p) => {
     return {
       no: zeroPaddingString(p.number),
@@ -93,12 +124,23 @@ function renderScoreborad(sessionData) {
       saves: p.stats.saves,
       stuns: p.stats.stuns,
       ping: p.ping,
-      level: p.level
+      level: p.level,
     };
   });
   for (let i = 0; i < 5; i++) {
     let p = blue_team[i];
-    if (!p) p = { no: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '', level: '' };
+    if (!p)
+      p = {
+        no: '',
+        name: '',
+        point: '',
+        assists: '',
+        assists: '',
+        saves: '',
+        stuns: '',
+        ping: '',
+        level: '',
+      };
     document.getElementById('b-no-' + i).innerText = p.no;
     document.getElementById('b-nm-' + i).innerText = p.name;
     document.getElementById('b-pt-' + i).innerText = p.point;
@@ -107,37 +149,78 @@ function renderScoreborad(sessionData) {
     document.getElementById('b-st-' + i).innerText = p.stuns;
     document.getElementById('b-pn-' + i).innerText = p.ping;
     document.getElementById('b-lv-' + i).innerText = p.level;
-
   }
-
 }
 
+const graphics = new PIXI.Graphics();
 
 /**
-   * render Map with session API Data
-   * @param {*} sessionData 
-   * @returns 
-   */
+ * render Map with session API Data
+ * @param {*} sessionData
+ * @returns
+ */
 function renderMap(sessionData) {
-
   const game_status = sessionData.game_status;
-  if (!game_status) { // if it isn't in game. not render.
+  if (!game_status) {
+    // if it isn't in game. not render.
     return;
   }
 
-  const disc_position = sessionData.disc.position; // [x, y, z]
+  graphics.clear();
+
+  let map = new PIXI.Sprite(app.loader.resources['echo-arena.png'].texture);
+
+  app.stage.addChild(map);
+
+
+  // position : [x, y, z]
+  // <- +z, A -x, V +x. -> -z
+  // Areana z: -50 ~ + 50,  x -20 ~ +20
+  const SCALE = 8; // scale of position to pixi 
+
+  // ORANGE TEAM
   const orange_team_players = sessionData.teams[1].players.map((p) => {
     return {
       no: zeroPaddingString(p.number),
-      position: p.head.position
+      possession: p.possession,
+      position: p.head.position,
     };
   });
+  for (const p of orange_team_players) {
+    const p_x = CENTER_X  - (p.position[2] * SCALE);
+    const p_y = CENTER_Y  + (p.position[0] * SCALE);
+    graphics.lineStyle(0);
+    graphics.beginFill(0xff8b00, 1);
+    graphics.drawCircle(p_x, p_y, 8);
+    graphics.endFill();
+  }
+
+  // BLUE TEAM
   const blue_team_players = sessionData.teams[0].players.map((p) => {
     return {
       no: zeroPaddingString(p.number),
-      position: p.head.position
+      possession: p.possession,
+      position: p.head.position,
     };
   });
+  for (const p of blue_team_players) {
+    const p_x = CENTER_X  - (p.position[2] * SCALE);
+    const p_y = CENTER_Y  + (p.position[0] * SCALE);
+    graphics.lineStyle(0);
+    graphics.beginFill(0x009afe, 1);
+    graphics.drawCircle(p_x, p_y, 8);
+    graphics.endFill();
+  }
 
+  // DISC
+  const disc_position = sessionData.disc.position; // [x, y, z]
+  const disc_x = CENTER_X - (disc_position[2] * SCALE);
+  const disc_y = CENTER_Y + (disc_position[0] * SCALE);
+  // console.log(disc_position);
+  graphics.lineStyle(0);
+  graphics.beginFill(0xffffff, 1);
+  graphics.drawCircle(disc_x, disc_y, 5);
+  graphics.endFill();
 
+  app.stage.addChild(graphics); 
 }
