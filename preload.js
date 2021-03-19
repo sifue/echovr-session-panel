@@ -104,7 +104,7 @@ function renderScoreborad(sessionData) {
     return {
       no: zeroPaddingString(p.number),
       name: p.name,
-      possession_time: Math.round(p.stats.possession_time * 10) / 10,
+      possession_time: Math.round(p.stats.possession_time),
       shots_taken: p.stats.shots_taken,
       point: p.stats.points,
       assists: p.stats.assists,
@@ -137,7 +137,7 @@ function renderScoreborad(sessionData) {
     return {
       no: zeroPaddingString(p.number),
       name: p.name,
-      possession_time: Math.round(p.stats.possession_time * 10) / 10,
+      possession_time: Math.round(p.stats.possession_time),
       shots_taken: p.stats.shots_taken,
       point: p.stats.points,
       assists: p.stats.assists,
