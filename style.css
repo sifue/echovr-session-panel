@@ -72,3 +72,7 @@ table.stats td {
 table.stats td.nm {
     text-align: left;
 }
+
+#map {
+    margin-top: 20px;
+}

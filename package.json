@@ -28,7 +28,8 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "pixi.js": "^6.0.0"
   },
   "config": {
     "forge": {

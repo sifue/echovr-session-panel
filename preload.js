@@ -1,9 +1,14 @@
+const PIXI = require('pixi.js');
+const app = new PIXI.Application({ width: 516, height: 256 });
+
 window.addEventListener('DOMContentLoaded', () => {
   setInterval(function () {
     fetch('http://127.0.0.1:6721/session')
       .then((response) => response.json())
       .then((data) => renderHTML(data));
   }, 1000);
+
+  document.getElementById('map').appendChild(app.view);
 });
 
 function zeroPaddingString(n) {
@@ -21,6 +26,17 @@ function zeroPaddingString(n) {
 function renderHTML(sessionData) {
   document.getElementById('container').style.display = 'block'; // show Table
 
+  renderScoreborad(sessionData);
+  renderMap(sessionData);
+}
+
+
+/**
+ * render Scoreboard with session API Data
+ * @param {*} sessionData 
+ * @returns 
+ */
+function renderScoreborad(sessionData) {
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector);
     if (element) element.innerText = text;
@@ -82,7 +98,7 @@ function renderHTML(sessionData) {
   });
   for (let i = 0; i < 5; i++) {
     let p = blue_team[i];
-    if (!p) p =  { no: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '', level: '' };
+    if (!p) p = { no: '', name: '', point: '', assists: '', assists: '', saves: '', stuns: '', ping: '', level: '' };
     document.getElementById('b-no-' + i).innerText = p.no;
     document.getElementById('b-nm-' + i).innerText = p.name;
     document.getElementById('b-pt-' + i).innerText = p.point;
@@ -91,6 +107,37 @@ function renderHTML(sessionData) {
     document.getElementById('b-st-' + i).innerText = p.stuns;
     document.getElementById('b-pn-' + i).innerText = p.ping;
     document.getElementById('b-lv-' + i).innerText = p.level;
+
   }
+
+}
+
+
+/**
+   * render Map with session API Data
+   * @param {*} sessionData 
+   * @returns 
+   */
+function renderMap(sessionData) {
+
+  const game_status = sessionData.game_status;
+  if (!game_status) { // if it isn't in game. not render.
+    return;
+  }
+
+  const disc_position = sessionData.disc.position; // [x, y, z]
+  const orange_team_players = sessionData.teams[1].players.map((p) => {
+    return {
+      no: zeroPaddingString(p.number),
+      position: p.head.position
+    };
+  });
+  const blue_team_players = sessionData.teams[0].players.map((p) => {
+    return {
+      no: zeroPaddingString(p.number),
+      position: p.head.position
+    };
+  });
+
 
 }
