@@ -13,7 +13,7 @@ table.score {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    height: 150px;
+    height: 160px;
 }
 
 table.score td {

@@ -1,19 +1,17 @@
 const PIXI = require('pixi.js');
-const ARENA_WIDTH = 640;
-const ARENA_HEIGHT = 258;
+const ARENA_WIDTH = 640; // width of echo-arena.png
+const ARENA_HEIGHT = 258; // height of echo-arena.png
 const CENTER_X = ARENA_WIDTH / 2;
 const CENTER_Y = ARENA_HEIGHT / 2;
 
-const app = new PIXI.Application({ 
-  width: ARENA_WIDTH, 
+const app = new PIXI.Application({
+  width: ARENA_WIDTH,
   height: ARENA_HEIGHT,
   antialias: true,
-  transparent: false
- });
+  transparent: false,
+});
 
-app.loader
-.add('echo-arena.png')
-.load(setup);
+app.loader.add('echo-arena.png').load(setup);
 
 function setup() {
   let map = new PIXI.Sprite(app.loader.resources['echo-arena.png'].texture);
@@ -80,34 +78,44 @@ function renderScoreborad(sessionData) {
   replaceText('blue-points', zeroPaddingString(blue_points));
 
   // ORANGE TEAM STATS
+  const empty_player =  {
+    no: '',
+    name: '',
+    possession_time: '',
+    shots_taken: '',
+    point: '',
+    assists: '',
+    assists: '',
+    saves: '',
+    stuns: '',
+    ping: '',
+    level: '',
+  };
+
   const orange_team = sessionData.teams[1].players.map((p) => {
     return {
       no: zeroPaddingString(p.number),
       name: p.name,
+      possession_time: Math.round(p.stats.possession_time * 10) / 10,
+      shots_taken: p.stats.shots_taken,
       point: p.stats.points,
       assists: p.stats.assists,
       saves: p.stats.saves,
       stuns: p.stats.stuns,
       ping: p.ping,
       level: p.level,
+      team: 'ORANGE',
     };
   });
-  for (let i = 0; i < 5; i++) {
+
+  const MAX_PLAYERS = 5;
+  for (let i = 0; i < MAX_PLAYERS; i++) {
     let p = orange_team[i];
-    if (!p)
-      p = {
-        no: '',
-        name: '',
-        point: '',
-        assists: '',
-        assists: '',
-        saves: '',
-        stuns: '',
-        ping: '',
-        level: '',
-      };
+    if (!p) p = empty_player;
     document.getElementById('o-no-' + i).innerText = p.no;
     document.getElementById('o-nm-' + i).innerText = p.name;
+    document.getElementById('o-ps-' + i).innerText = p.possession_time;
+    document.getElementById('o-sh-' + i).innerText = p.shots_taken;
     document.getElementById('o-pt-' + i).innerText = p.point;
     document.getElementById('o-as-' + i).innerText = p.assists;
     document.getElementById('o-sv-' + i).innerText = p.saves;
@@ -121,30 +129,24 @@ function renderScoreborad(sessionData) {
     return {
       no: zeroPaddingString(p.number),
       name: p.name,
+      possession_time: Math.round(p.stats.possession_time * 10) / 10,
+      shots_taken: p.stats.shots_taken,
       point: p.stats.points,
       assists: p.stats.assists,
       saves: p.stats.saves,
       stuns: p.stats.stuns,
       ping: p.ping,
       level: p.level,
+      team: 'BLUE',
     };
   });
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < MAX_PLAYERS; i++) {
     let p = blue_team[i];
-    if (!p)
-      p = {
-        no: '',
-        name: '',
-        point: '',
-        assists: '',
-        assists: '',
-        saves: '',
-        stuns: '',
-        ping: '',
-        level: '',
-      };
+    if (!p) p = empty_player;
     document.getElementById('b-no-' + i).innerText = p.no;
     document.getElementById('b-nm-' + i).innerText = p.name;
+    document.getElementById('b-ps-' + i).innerText = p.possession_time;
+    document.getElementById('b-sh-' + i).innerText = p.shots_taken;
     document.getElementById('b-pt-' + i).innerText = p.point;
     document.getElementById('b-as-' + i).innerText = p.assists;
     document.getElementById('b-sv-' + i).innerText = p.saves;
@@ -169,16 +171,20 @@ function renderMap(sessionData) {
     return;
   }
 
-  graphicses.forEach((g) => {g.clear();});
+  graphicses.forEach((g) => {
+    g.clear();
+  });
   graphicses.clear = [];
-  texts.forEach((t) => {t.destroy();});
+  texts.forEach((t) => {
+    t.destroy();
+  });
   texts = [];
 
   // position : [x, y, z]
   // <- +z, A -x, V +x. -> -z
   // Areana z: -50 ~ + 50,  x -20 ~ +20
   const SCALE = 8; // scale of position to pixi
-  const TEXT_SIZE = 18; 
+  const TEXT_SIZE = 18;
   const TEXT_OFFSET = 1;
 
   // ORANGE TEAM
@@ -187,7 +193,7 @@ function renderMap(sessionData) {
       no: zeroPaddingString(p.number),
       possession: p.possession,
       position: p.head.position,
-      team: 'ORANGE'
+      team: 'ORANGE',
     };
   });
   // BLUE TEAM
@@ -196,19 +202,19 @@ function renderMap(sessionData) {
       no: zeroPaddingString(p.number),
       possession: p.possession,
       position: p.head.position,
-      team: 'BLUE'
+      team: 'BLUE',
     };
   });
 
   // TEAM PLAYERS
   const team_players = orange_team_players.concat(blue_team_players);
   for (const p of team_players) {
-    const p_x = CENTER_X  - (p.position[2] * SCALE);
-    const p_y = CENTER_Y  + (p.position[0] * SCALE);
+    const p_x = CENTER_X - p.position[2] * SCALE;
+    const p_y = CENTER_Y + p.position[0] * SCALE;
 
     const graphics = new PIXI.Graphics();
     if (p.possession) {
-      graphics.lineStyle(5,0xffffff);
+      graphics.lineStyle(5, 0xffffff);
     } else {
       graphics.lineStyle(0);
     }
@@ -218,29 +224,33 @@ function renderMap(sessionData) {
     } else {
       graphics.beginFill(0x009afe, 1);
     }
-    
+
     graphics.drawCircle(p_x, p_y, 16);
     graphics.endFill();
     app.stage.addChild(graphics);
     graphicses.push(graphics);
 
-    const text = new PIXI.Text(p.no, {fontFamily : 'Arial', fontSize: TEXT_SIZE, fill : 0xffffff, align : 'center'});
-    text.x = p_x - (TEXT_SIZE / 2) - TEXT_OFFSET;
-    text.y = p_y - (TEXT_SIZE / 2) - TEXT_OFFSET;
+    const text = new PIXI.Text(p.no, {
+      fontFamily: 'Arial',
+      fontSize: TEXT_SIZE,
+      fill: 0xffffff,
+      align: 'center',
+    });
+    text.x = p_x - TEXT_SIZE / 2 - TEXT_OFFSET;
+    text.y = p_y - TEXT_SIZE / 2 - TEXT_OFFSET;
     app.stage.addChild(text);
     texts.push(text);
   }
 
   // DISC
   const disc_position = sessionData.disc.position; // [x, y, z]
-  const disc_x = CENTER_X - (disc_position[2] * SCALE);
-  const disc_y = CENTER_Y + (disc_position[0] * SCALE);
+  const disc_x = CENTER_X - disc_position[2] * SCALE;
+  const disc_y = CENTER_Y + disc_position[0] * SCALE;
   const graphics = new PIXI.Graphics();
   graphics.lineStyle(0);
   graphics.beginFill(0xffffff, 1);
   graphics.drawCircle(disc_x, disc_y, 8);
   graphics.endFill();
-  app.stage.addChild(graphics); 
+  app.stage.addChild(graphics);
   graphicses.push(graphics);
-
 }
