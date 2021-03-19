@@ -10,7 +10,7 @@ Execute `echovr-session-panel.exe`.
 
 # API Document
 Enable API in EchoVR.
-See [https://github.com/Ajedi32/echovr_api_docs#sessionid](https://github.com/Ajedi32/echovr_api_docs#sessionid).
+See [https://github.com/Ajedi32/echovr_api_docs](https://github.com/Ajedi32/echovr_api_docs).
 
 ### Dev
 Install Node.js (Upper v14.16.0). As follows.
