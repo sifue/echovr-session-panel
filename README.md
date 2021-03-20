@@ -5,11 +5,14 @@ This tool is for PC edition EchoVR. By launching this tool, you can view the sco
 
 # Usage
 Enable API in PC edition EchoVR.
+
 Get `echovr-session-panel-win32-x64.zip` from [Releases tab](https://github.com/sifue/echovr-session-panel/releases) and Unzip.
+
 Execute `echovr-session-panel.exe`.
 
 # API Document
 Enable API in EchoVR.
+
 See [https://github.com/Ajedi32/echovr_api_docs](https://github.com/Ajedi32/echovr_api_docs).
 
 ### Dev
