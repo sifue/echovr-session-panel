@@ -1,6 +1,6 @@
 {
   "name": "echovr-session-panel",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Panel UI for EchoVR session API.",
   "main": "main.js",
   "scripts": {

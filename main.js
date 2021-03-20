@@ -23,8 +23,10 @@ function createWindow() {
             const prompt = require('electron-prompt');
             prompt({
               title:
-                'Input sessions API URL. ex. http://127.0.0.1:6721/session',
-              label: 'URL:',
+                'Settings',
+              width : 370,
+              height : 200,
+              label: 'Session API URL:',
               value: 'http://127.0.0.1:6721/session',
               inputAttrs: {
                 type: 'url',

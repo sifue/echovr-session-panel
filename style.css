@@ -69,6 +69,21 @@ table.stats td {
     border: solid 2px #eee;
 }
 
+table.stats td.nopossess {
+    text-align: center;
+    padding: 2px;
+    border: solid 2px #eee;
+    text-decoration: none;
+}
+
+table.stats td.possess {
+    text-align: center;
+    padding: 2px;
+    border: solid 2px #eee;
+    text-decoration: underline #d0343f;
+    text-decoration-thickness: 3px;
+}
+
 table.stats td.nm {
     text-align: left;
 }

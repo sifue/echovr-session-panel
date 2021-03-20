@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
       .then((response) => response.json())
       .then((data) => renderHTML(data))
       .catch(console.error);
-  }, 1000);
+  }, 500);
 
   document.getElementById('map').appendChild(app.view);
 });
@@ -70,8 +70,7 @@ function renderScoreborad(sessionData) {
   replaceText('sessionid', sessionid);
 
   const game_status = sessionData.game_status;
-  if (!game_status) {
-    // if it isn't in game. not render.
+  if (!game_status || game_status === 'round_over' || game_status === 'post_match') {
     return;
   }
 
@@ -89,6 +88,7 @@ function renderScoreborad(sessionData) {
   const empty_player = {
     no: '',
     name: '',
+    possession : false,
     possession_time: '',
     shots_taken: '',
     point: '',
@@ -104,6 +104,7 @@ function renderScoreborad(sessionData) {
     return {
       no: zeroPaddingString(p.number),
       name: p.name,
+      possession : p.possession,
       possession_time: Math.round(p.stats.possession_time),
       shots_taken: p.stats.shots_taken,
       point: p.stats.points,
@@ -122,6 +123,19 @@ function renderScoreborad(sessionData) {
     if (!p) p = empty_player;
     document.getElementById('o-no-' + i).innerText = p.no;
     document.getElementById('o-nm-' + i).innerText = p.name;
+
+    if (p.possession) {
+      document.getElementById('o-no-' + i).classList.remove('nopossess');
+      document.getElementById('o-no-' + i).classList.add('possess');
+      document.getElementById('o-nm-' + i).classList.remove('nopossess');
+      document.getElementById('o-nm-' + i).classList.add('possess');
+    } else {
+      document.getElementById('o-no-' + i).classList.remove('possess');
+      document.getElementById('o-no-' + i).classList.add('nopossess');
+      document.getElementById('o-nm-' + i).classList.remove('possess');
+      document.getElementById('o-nm-' + i).classList.add('nopossess');
+    }
+
     document.getElementById('o-ps-' + i).innerText = p.possession_time;
     document.getElementById('o-sh-' + i).innerText = p.shots_taken;
     document.getElementById('o-pt-' + i).innerText = p.point;
@@ -138,6 +152,7 @@ function renderScoreborad(sessionData) {
       no: zeroPaddingString(p.number),
       name: p.name,
       possession_time: Math.round(p.stats.possession_time),
+      possession : p.possession,
       shots_taken: p.stats.shots_taken,
       point: p.stats.points,
       assists: p.stats.assists,
@@ -153,6 +168,19 @@ function renderScoreborad(sessionData) {
     if (!p) p = empty_player;
     document.getElementById('b-no-' + i).innerText = p.no;
     document.getElementById('b-nm-' + i).innerText = p.name;
+
+    if (p.possession) {
+      document.getElementById('b-no-' + i).classList.remove('nopossess');
+      document.getElementById('b-no-' + i).classList.add('possess');
+      document.getElementById('b-nm-' + i).classList.remove('nopossess');
+      document.getElementById('b-nm-' + i).classList.add('possess');
+    } else {
+      document.getElementById('b-no-' + i).classList.remove('possess');
+      document.getElementById('b-no-' + i).classList.add('nopossess');
+      document.getElementById('b-nm-' + i).classList.remove('possess');
+      document.getElementById('b-nm-' + i).classList.add('nopossess');
+    }
+
     document.getElementById('b-ps-' + i).innerText = p.possession_time;
     document.getElementById('b-sh-' + i).innerText = p.shots_taken;
     document.getElementById('b-pt-' + i).innerText = p.point;
@@ -174,8 +202,7 @@ let texts = [];
  */
 function renderMap(sessionData) {
   const game_status = sessionData.game_status;
-  if (!game_status) {
-    // if it isn't in game. not render.
+  if (!game_status || game_status === 'round_over' || game_status === 'post_match') {
     return;
   }
 
@@ -255,10 +282,8 @@ function renderMap(sessionData) {
   const disc_x = CENTER_X - disc_position[2] * SCALE;
   const disc_y = CENTER_Y + disc_position[0] * SCALE;
   const graphics = new PIXI.Graphics();
-  graphics.lineStyle(0);
-  graphics.beginFill(0xffffff, 1);
+  graphics.lineStyle(3, 0xffffff);
   graphics.drawCircle(disc_x, disc_y, 8);
-  graphics.endFill();
   app.stage.addChild(graphics);
   graphicses.push(graphics);
 }
