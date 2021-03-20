@@ -51,6 +51,8 @@ function zeroPaddingString(n) {
 function renderHTML(sessionData) {
   document.getElementById('container').style.display = 'block'; // show Table
 
+  console.log(sessionData); // for debug
+
   renderScoreborad(sessionData);
   renderMap(sessionData);
 }
