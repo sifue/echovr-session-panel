@@ -1,6 +1,6 @@
 body {
     background: #32cd32;
-    color: #eee;
+    color: #fff;
     font-family: "Arial";
     text-shadow: 1px 1px 0px #444;
 }
@@ -24,7 +24,7 @@ table.score td {
 #game-clock-display {
     font-size: 20px;
     padding: 5px;
-    border: solid 2px #eee;
+    border: solid 2px #fff;
     vertical-align: center;
     font-weight: bold;
 }
@@ -33,7 +33,7 @@ table.score td {
     color : #ff8b00;
     font-size: 40px;
     padding: 5px;
-    border: solid 2px #eee;
+    border: solid 2px #fff;
     vertical-align: center;
     font-weight: bold;
 }
@@ -42,7 +42,7 @@ table.score td {
     color : #009afe;
     font-size: 40px;
     padding: 5px;
-    border: solid 2px #eee;
+    border: solid 2px #fff;
     vertical-align: center;
     font-weight: bold;
 }
@@ -51,7 +51,7 @@ table.stats {
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
-    border: solid 2px #eee;
+    border: solid 2px #fff;
     font-size: 14px;
     margin: 0px 2px 0px 2px;
 }
@@ -59,29 +59,31 @@ table.stats {
 table.stats th {
     text-align: center;
     padding: 2px;
-    border: solid 2px #eee;
+    border: solid 2px #fff;
     font-weight: bold;
 }
 
 table.stats td {
     text-align: center;
     padding: 2px;
-    border: solid 2px #eee;
+    border: solid 2px #fff;
 }
 
 table.stats td.nopossess {
-    text-align: center;
-    padding: 2px;
-    border: solid 2px #eee;
     text-decoration: none;
 }
 
 table.stats td.possess {
-    text-align: center;
-    padding: 2px;
-    border: solid 2px #eee;
     text-decoration: underline #d0343f;
     text-decoration-thickness: 3px;
+}
+
+table.stats td.nostuned {
+    color: #fff;
+}
+
+table.stats td.stuned {
+    color: #777;
 }
 
 table.stats td.nm {

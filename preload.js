@@ -91,6 +91,7 @@ function renderScoreborad(sessionData) {
     no: '',
     name: '',
     possession : false,
+    stunned: false,
     possession_time: '',
     shots_taken: '',
     point: '',
@@ -107,6 +108,7 @@ function renderScoreborad(sessionData) {
       no: zeroPaddingString(p.number),
       name: p.name,
       possession : p.possession,
+      stunned: p.stunned,
       possession_time: Math.round(p.stats.possession_time),
       shots_taken: p.stats.shots_taken,
       point: p.stats.points,
@@ -138,6 +140,18 @@ function renderScoreborad(sessionData) {
       document.getElementById('o-nm-' + i).classList.add('nopossess');
     }
 
+    if (p.stunned) {
+      document.getElementById('o-no-' + i).classList.remove('nostuned');
+      document.getElementById('o-no-' + i).classList.add('stuned');
+      document.getElementById('o-nm-' + i).classList.remove('nostuned');
+      document.getElementById('o-nm-' + i).classList.add('stuned');
+    } else {
+      document.getElementById('o-no-' + i).classList.remove('stuned');
+      document.getElementById('o-no-' + i).classList.add('nostuned');
+      document.getElementById('o-nm-' + i).classList.remove('stuned');
+      document.getElementById('o-nm-' + i).classList.add('nostuned');
+    }
+
     document.getElementById('o-ps-' + i).innerText = p.possession_time;
     document.getElementById('o-sh-' + i).innerText = p.shots_taken;
     document.getElementById('o-pt-' + i).innerText = p.point;
@@ -155,6 +169,7 @@ function renderScoreborad(sessionData) {
       name: p.name,
       possession_time: Math.round(p.stats.possession_time),
       possession : p.possession,
+      stunned: p.stunned,
       shots_taken: p.stats.shots_taken,
       point: p.stats.points,
       assists: p.stats.assists,
@@ -181,6 +196,18 @@ function renderScoreborad(sessionData) {
       document.getElementById('b-no-' + i).classList.add('nopossess');
       document.getElementById('b-nm-' + i).classList.remove('possess');
       document.getElementById('b-nm-' + i).classList.add('nopossess');
+    }
+
+    if (p.stunned) {
+      document.getElementById('b-no-' + i).classList.remove('nostuned');
+      document.getElementById('b-no-' + i).classList.add('stuned');
+      document.getElementById('b-nm-' + i).classList.remove('nostuned');
+      document.getElementById('b-nm-' + i).classList.add('stuned');
+    } else {
+      document.getElementById('b-no-' + i).classList.remove('stuned');
+      document.getElementById('b-no-' + i).classList.add('nostuned');
+      document.getElementById('b-nm-' + i).classList.remove('stuned');
+      document.getElementById('b-nm-' + i).classList.add('nostuned');
     }
 
     document.getElementById('b-ps-' + i).innerText = p.possession_time;
@@ -229,6 +256,7 @@ function renderMap(sessionData) {
     return {
       no: zeroPaddingString(p.number),
       possession: p.possession,
+      stunned: p.stunned,
       position: p.head.position,
       team: 'ORANGE',
     };
@@ -238,6 +266,7 @@ function renderMap(sessionData) {
     return {
       no: zeroPaddingString(p.number),
       possession: p.possession,
+      stunned: p.stunned,
       position: p.head.position,
       team: 'BLUE',
     };
@@ -257,9 +286,18 @@ function renderMap(sessionData) {
     }
 
     if (p.team === 'ORANGE') {
-      graphics.beginFill(0xff8b00, 1);
+      if (p.stunned) {
+        graphics.beginFill(0xa85b00, 1);
+      } else {
+        graphics.beginFill(0xff8b00, 1);
+      }
+      
     } else {
-      graphics.beginFill(0x009afe, 1);
+      if (p.stunned) {
+        graphics.beginFill(0x0062a1, 1);
+      } else {
+        graphics.beginFill(0x009afe, 1);
+      }
     }
 
     graphics.drawCircle(p_x, p_y, 16);
