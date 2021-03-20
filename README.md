@@ -1,14 +1,29 @@
 # EchoVR Session Panel
-This tool is for PC edition EchoVR. By launching this tool, you can view the score of the current match and the stats of the players of the team. It is a green background because it is intended to be synthesized with OBS chroma key.
+This tool is for EchoVR session API. By launching this tool, you can view the score of the current match and the stats of the players of the team. It is a green background because it is intended to be synthesized with OBS chroma key.
 
-![sample.png](./sample.png)
+![readme-images/sample.png](./readme-images/sample.png)
 
-# Usage
-Enable API in PC edition EchoVR.
+# Usage (PC edition)
+Enable API in Settings of EchoVR.
 
 Get `echovr-session-panel-win32-x64.zip` from [Releases tab](https://github.com/sifue/echovr-session-panel/releases) and Unzip.
 
 Execute `echovr-session-panel.exe`.
+
+# Usage (Quest2 edition)
+Enable API in Settings of EchoVR.
+
+Find Quest2 IP address(ex. `192.168.10.11`) with [IgniteBot](https://ignitevr.gg/ignitebot).
+
+![readme-images/ignitebot-find-quest2.png](./readme-images/ignitebot-find-quest2.png)
+
+Get `echovr-session-panel-win32-x64.zip` from [Releases tab](https://github.com/sifue/echovr-session-panel/releases) and Unzip.
+
+Execute `echovr-session-panel.exe`.
+
+Configure IP Address(ex. `192.168.10.11`) of URL in Settings of Menu.
+
+![readme-images/quest2-settings.png](./readme-images/quest2-settings.png)
 
 # API Document
 Enable API in EchoVR.
