@@ -4,6 +4,7 @@ const ARENA_HEIGHT = 258; // height of echo-arena.png
 const CENTER_X = ARENA_WIDTH / 2;
 const CENTER_Y = ARENA_HEIGHT / 2;
 
+// Set up PIXI.js app
 const app = new PIXI.Application({
   width: ARENA_WIDTH,
   height: ARENA_HEIGHT,
@@ -20,6 +21,7 @@ function setup() {
 
 let fetchURL = 'http://127.0.0.1:6721/session';
 
+// Sent Message Listener
 require('electron').ipcRenderer.on('settingURL', (event, message) => {
   fetchURL = message;
   console.log('fetchURL: ' + fetchURL);
@@ -36,6 +38,11 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('map').appendChild(app.view);
 });
 
+/**
+ * Padding 0
+ * @param {*} n
+ * @returns
+ */
 function zeroPaddingString(n) {
   if (n < 10) {
     return '0' + n;
@@ -72,7 +79,11 @@ function renderScoreborad(sessionData) {
   replaceText('sessionid', sessionid);
 
   const game_status = sessionData.game_status;
-  if (!game_status || game_status === 'round_over' || game_status === 'post_match') {
+  if (
+    !game_status ||
+    game_status === 'round_over' ||
+    game_status === 'post_match'
+  ) {
     return;
   }
 
@@ -90,7 +101,7 @@ function renderScoreborad(sessionData) {
   const empty_player = {
     no: '',
     name: '',
-    possession : false,
+    possession: false,
     stunned: false,
     possession_time: '',
     shots_taken: '',
@@ -107,7 +118,7 @@ function renderScoreborad(sessionData) {
     return {
       no: zeroPaddingString(p.number),
       name: p.name,
-      possession : p.possession,
+      possession: p.possession,
       stunned: p.stunned,
       possession_time: Math.round(p.stats.possession_time),
       shots_taken: p.stats.shots_taken,
@@ -168,7 +179,7 @@ function renderScoreborad(sessionData) {
       no: zeroPaddingString(p.number),
       name: p.name,
       possession_time: Math.round(p.stats.possession_time),
-      possession : p.possession,
+      possession: p.possession,
       stunned: p.stunned,
       shots_taken: p.stats.shots_taken,
       point: p.stats.points,
@@ -231,7 +242,11 @@ let texts = [];
  */
 function renderMap(sessionData) {
   const game_status = sessionData.game_status;
-  if (!game_status || game_status === 'round_over' || game_status === 'post_match') {
+  if (
+    !game_status ||
+    game_status === 'round_over' ||
+    game_status === 'post_match'
+  ) {
     return;
   }
 
@@ -291,7 +306,6 @@ function renderMap(sessionData) {
       } else {
         graphics.beginFill(0xff8b00, 1);
       }
-      
     } else {
       if (p.stunned) {
         graphics.beginFill(0x0062a1, 1);
