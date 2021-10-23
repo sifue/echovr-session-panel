@@ -77,6 +77,8 @@ function renderScoreborad(sessionData) {
 
   const sessionid = sessionData.sessionid;
   replaceText('sessionid', sessionid);
+  replaceText('orange-points-round', sessionData.orange_round_score);
+  replaceText('blue-points-round', sessionData.blue_round_score);
 
   const game_status = sessionData.game_status;
   if (
@@ -107,8 +109,8 @@ function renderScoreborad(sessionData) {
     shots_taken: '',
     point: '',
     assists: '',
-    assists: '',
     saves: '',
+    steals: '',
     stuns: '',
     ping: '',
     level: '',
@@ -125,6 +127,7 @@ function renderScoreborad(sessionData) {
       point: p.stats.points,
       assists: p.stats.assists,
       saves: p.stats.saves,
+      steals: p.stats.steals,
       stuns: p.stats.stuns,
       ping: p.ping,
       level: p.level,
@@ -133,6 +136,15 @@ function renderScoreborad(sessionData) {
   });
 
   const MAX_PLAYERS = 5;
+  const orange_total = {
+    possession_time: 0,
+    shots_taken: 0,
+    point: 0,
+    assists: 0,
+    saves: 0,
+    steals: 0,
+    stuns: 0,
+  };
   for (let i = 0; i < MAX_PLAYERS; i++) {
     let p = orange_team[i];
     if (!p) p = empty_player;
@@ -164,13 +176,24 @@ function renderScoreborad(sessionData) {
     }
 
     document.getElementById('o-ps-' + i).innerText = p.possession_time;
-    document.getElementById('o-sh-' + i).innerText = p.shots_taken;
-    document.getElementById('o-pt-' + i).innerText = p.point;
     document.getElementById('o-as-' + i).innerText = p.assists;
     document.getElementById('o-sv-' + i).innerText = p.saves;
+    document.getElementById('o-sl-' + i).innerText = p.steals;
     document.getElementById('o-st-' + i).innerText = p.stuns;
+    document.getElementById('o-sh-' + i).innerText = p.shots_taken;
+    document.getElementById('o-pt-' + i).innerText = p.point;
     document.getElementById('o-pn-' + i).innerText = p.ping;
     document.getElementById('o-lv-' + i).innerText = p.level;
+
+    if (p !== empty_player) {
+      orange_total.possession_time += parseInt(p.possession_time);
+      orange_total.assists += parseInt(p.assists);
+      orange_total.saves += parseInt(p.saves);
+      orange_total.steals += parseInt(p.steals);
+      orange_total.stuns += parseInt(p.stuns);
+      orange_total.shots_taken += parseInt(p.shots_taken);
+      orange_total.point += parseInt(p.point);
+    }
   }
 
   // BLUE TEAM STATS
@@ -185,12 +208,23 @@ function renderScoreborad(sessionData) {
       point: p.stats.points,
       assists: p.stats.assists,
       saves: p.stats.saves,
+      steals: p.stats.steals,
       stuns: p.stats.stuns,
       ping: p.ping,
       level: p.level,
       team: 'BLUE',
     };
   });
+
+  const blue_total = {
+    possession_time: 0,
+    shots_taken: 0,
+    point: 0,
+    assists: 0,
+    saves: 0,
+    steals: 0,
+    stuns: 0,
+  };
   for (let i = 0; i < MAX_PLAYERS; i++) {
     let p = blue_team[i];
     if (!p) p = empty_player;
@@ -223,13 +257,83 @@ function renderScoreborad(sessionData) {
 
     document.getElementById('b-ps-' + i).innerText = p.possession_time;
     document.getElementById('b-sh-' + i).innerText = p.shots_taken;
+    document.getElementById('b-sv-' + i).innerText = p.saves;
+    document.getElementById('b-sl-' + i).innerText = p.steals;
+    document.getElementById('b-st-' + i).innerText = p.stuns;
     document.getElementById('b-pt-' + i).innerText = p.point;
     document.getElementById('b-as-' + i).innerText = p.assists;
-    document.getElementById('b-sv-' + i).innerText = p.saves;
-    document.getElementById('b-st-' + i).innerText = p.stuns;
     document.getElementById('b-pn-' + i).innerText = p.ping;
     document.getElementById('b-lv-' + i).innerText = p.level;
+
+    if (p !== empty_player) {
+      blue_total.possession_time += parseInt(p.possession_time);
+      blue_total.assists += parseInt(p.assists);
+      blue_total.saves += parseInt(p.saves);
+      blue_total.steals += parseInt(p.steals);
+      blue_total.stuns += parseInt(p.stuns);
+      blue_total.shots_taken += parseInt(p.shots_taken);
+      blue_total.point += parseInt(p.point);
+    }
   }
+
+  function percentage(target_num, other_num) {
+    target_num = parseInt(target_num);
+    other_num = parseInt(other_num);
+    if (target_num <= 0 || target_num + other_num <= 0) return 0 + '%';
+    return Math.round((target_num / (target_num + other_num)) * 100) + '%';
+  }
+
+  document.getElementById('o-nm-t').innerText = 'TOTAL';
+  document.getElementById('o-ps-t').innerText = percentage(
+    orange_total.possession_time,
+    blue_total.possession_time
+  );
+  document.getElementById('o-sh-t').innerText = percentage(
+    orange_total.shots_taken,
+    blue_total.shots_taken
+  );
+  document.getElementById('o-sv-t').innerText = percentage(
+    orange_total.saves,
+    blue_total.saves
+  );
+  document.getElementById('o-sl-t').innerText = percentage(
+    orange_total.steals,
+    blue_total.steals
+  );
+  document.getElementById('o-st-t').innerText = percentage(
+    orange_total.stuns,
+    blue_total.stuns
+  );
+  document.getElementById('o-as-t').innerText = percentage(
+    orange_total.assists,
+    blue_total.assists
+  );
+
+  document.getElementById('b-nm-t').innerText = 'TOTAL';
+  document.getElementById('b-ps-t').innerText = percentage(
+    blue_total.possession_time,
+    orange_total.possession_time
+  );
+  document.getElementById('b-sh-t').innerText = percentage(
+    blue_total.shots_taken,
+    orange_total.shots_taken
+  );
+  document.getElementById('b-sv-t').innerText = percentage(
+    blue_total.saves,
+    orange_total.saves
+  );
+  document.getElementById('b-sl-t').innerText = percentage(
+    blue_total.steals,
+    orange_total.steals
+  );
+  document.getElementById('b-st-t').innerText = percentage(
+    blue_total.stuns,
+    orange_total.stuns
+  );
+  document.getElementById('b-as-t').innerText = percentage(
+    blue_total.assists,
+    orange_total.assists
+  );
 }
 
 let graphicses = [];

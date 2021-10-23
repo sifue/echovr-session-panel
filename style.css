@@ -1,95 +1,154 @@
 body {
-    background: #32cd32;
-    color: #fff;
-    font-family: "Arial";
-    text-shadow: 1px 1px 0px #444;
+  background: #0a0e13;
+  color: #fff;
+  font-family: 'Colfax', Helvetica, sans-serif;
 }
 
 #container {
-    display: none;
+  display: block;
 }
 
 table.score {
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: fixed;
-    height: 160px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  height: auto;
+  width: auto;
 }
 
-table.score td {
-    text-align: center;
-    vertical-align: center;
+table.score > tbody {
+  text-align: center;
+  vertical-align: center;
+  height: auto;
+  width: auto;
 }
 
-#game-clock-display {
-    font-size: 20px;
-    padding: 5px;
-    border: solid 2px #fff;
-    vertical-align: center;
-    font-weight: bold;
+table.score > tbody > tr {
+  width: auto;
 }
 
-#orange-points {
-    color : #ff8b00;
-    font-size: 40px;
-    padding: 5px;
-    border: solid 2px #fff;
-    vertical-align: center;
-    font-weight: bold;
+table.score > tbody > tr > td#game-clock-display {
+  margin: 1px;
+  font-size: 20px;
+  padding: 5px;
+  border: solid 1px #fff;
+  vertical-align: center;
+  width: 100px;
 }
 
-#blue-points {
-    color : #009afe;
-    font-size: 40px;
-    padding: 5px;
-    border: solid 2px #fff;
-    vertical-align: center;
-    font-weight: bold;
+table.score > tbody > tr > td#orange-points {
+  color: #ff8b00;
+  font-size: 40px;
+  padding: 5px;
+  border: solid 1px #fff;
+  vertical-align: center;
+  font-weight: bold;
+  width: 50px;
+}
+
+table.score > tbody > tr > td#blue-points {
+  color: #009afe;
+  font-size: 40px;
+  padding: 5px;
+  border: solid 1px #fff;
+  vertical-align: center;
+  font-weight: bold;
+  width: 50px;
+}
+
+table.score > tbody > tr > td#orange-points-round {
+  color: #ff8b00;
+  font-size: 14px;
+  padding: 2px;
+  border: solid 1px #fff;
+  vertical-align: center;
+  height: 30px;
+  width: 50px;
+}
+
+table.score > tbody > tr > td#blue-points-round {
+  color: #009afe;
+  font-size: 14px;
+  padding: 2px;
+  border: solid 1px #fff;
+  vertical-align: center;
+  height: 30px;
+  width: 50px;
 }
 
 table.stats {
-    border-collapse: collapse;
-    border-spacing: 0;
-    table-layout: fixed;
-    border: solid 2px #fff;
-    font-size: 14px;
-    margin: 0px 2px 0px 2px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  height: auto;
+  width: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  border: solid 1px #fff;
+  font-size: 14px;
 }
 
-table.stats th {
-    text-align: center;
-    padding: 2px;
-    border: solid 2px #fff;
-    font-weight: bold;
+table.stats > tbody {
+  height: auto;
+  width: auto;
 }
 
-table.stats td {
-    text-align: center;
-    padding: 2px;
-    border: solid 2px #fff;
+table.stats > tbody > tr {
+  height: 22px;
+  width: auto;
 }
 
-table.stats td.nopossess {
-    text-decoration: none;
+table.stats > tbody > tr > th {
+  text-align: center;
+  padding: 2px;
+  border: solid 1px #fff;
+  font-weight: bold;
+  width: 32spx;
 }
 
-table.stats td.possess {
-    text-decoration: underline #d0343f;
-    text-decoration-thickness: 3px;
+table.stats > tbody > tr > td {
+  text-align: center;
+  padding: 2px;
+  border: solid 1px #fff;
+  width: 32px;
+  white-space: nowrap;
 }
 
-table.stats td.nostuned {
-    color: #fff;
+.nm-td {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-table.stats td.stuned {
-    color: #777;
+table.stats > tbody > tr > td > div.nm {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
 }
 
-table.stats td.nm {
-    text-align: left;
+table.stats > tbody > tr > td.nopossess {
+  text-decoration: none;
+}
+
+table.stats > tbody > tr > td.possess {
+  text-decoration: underline #d0343f;
+  text-decoration-thickness: 3px;
+}
+
+table.stats > tbody > tr > td.nostuned {
+  color: #fff;
+}
+
+table.stats > tbody > tr > td.stuned {
+  color: #777;
+}
+
+table.stats > tbody > tr > td.nm {
+  text-align: left;
 }
 
 #map {
-    margin-top: 20px;
+  margin-top: 20px;
 }

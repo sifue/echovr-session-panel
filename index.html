@@ -1,178 +1,222 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>EchoVR Session Panel</title>
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
+  <body>
     <div id="container">
-        <table class="score">
-            <tr>
-                <td rowspan="2">
-
-                    <table class="stats">
-                        <tr>
-                            <th>No.</th>
-                            <th>Name</th>
-                            <th>Poss.<br>Time</th>
-                            <th>Shot<br>Taken</th>
-                            <th>Point</th>
-                            <th>Assist</th>
-                            <th>Save</th>
-                            <th>Stun</th>
-                            <th>Ping</th>
-                            <th>Lv.</th>
-                        </tr>
-                        <tr>
-                            <td class="no" id="o-no-0"></td>
-                            <td class="nm" id="o-nm-0"></td>
-                            <td class="ps" id="o-ps-0"></td>
-                            <td class="sh" id="o-sh-0"></td>
-                            <td class="pt" id="o-pt-0"></td>
-                            <td class="as" id="o-as-0"></td>
-                            <td class="sv" id="o-sv-0"></td>
-                            <td class="st" id="o-st-0"></td>
-                            <td class="pn" id="o-pn-0"></td>
-                            <td class="lv" id="o-lv-0"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="o-no-1"></td>
-                            <td class="nm" id="o-nm-1"></td>
-                            <td class="ps" id="o-ps-1"></td>
-                            <td class="sh" id="o-sh-1"></td>
-                            <td class="pt" id="o-pt-1"></td>
-                            <td class="as" id="o-as-1"></td>
-                            <td class="sv" id="o-sv-1"></td>
-                            <td class="st" id="o-st-1"></td>
-                            <td class="pn" id="o-pn-1"></td>
-                            <td class="lv" id="o-lv-1"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="o-no-2"></td>
-                            <td class="nm" id="o-nm-2"></td>
-                            <td class="ps" id="o-ps-2"></td>
-                            <td class="sh" id="o-sh-2"></td>
-                            <td class="pt" id="o-pt-2"></td>
-                            <td class="as" id="o-as-2"></td>
-                            <td class="sv" id="o-sv-2"></td>
-                            <td class="st" id="o-st-2"></td>
-                            <td class="pn" id="o-pn-2"></td>
-                            <td class="lv" id="o-lv-2"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="o-no-3"></td>
-                            <td class="nm" id="o-nm-3"></td>
-                            <td class="ps" id="o-ps-3"></td>
-                            <td class="sh" id="o-sh-3"></td>
-                            <td class="pt" id="o-pt-3"></td>
-                            <td class="as" id="o-as-3"></td>
-                            <td class="sv" id="o-sv-3"></td>
-                            <td class="st" id="o-st-3"></td>
-                            <td class="pn" id="o-pn-3"></td>
-                            <td class="lv" id="o-lv-3"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="o-no-4"></td>
-                            <td class="nm" id="o-nm-4"></td>
-                            <td class="ps" id="o-ps-4"></td>
-                            <td class="sh" id="o-sh-4"></td>
-                            <td class="pt" id="o-pt-4"></td>
-                            <td class="as" id="o-as-4"></td>
-                            <td class="sv" id="o-sv-4"></td>
-                            <td class="st" id="o-st-4"></td>
-                            <td class="pn" id="o-pn-4"></td>
-                            <td class="lv" id="o-lv-4"></td>
-                        </tr>
-                    </table>
-                </td>
-                <td id="game-clock-display" colspan="2"></td>
-                <td rowspan="2">
-                    <table class="stats">
-                        <tr>
-                            <th>No.</th>
-                            <th>Name</th>
-                            <th>Poss.<br>Time</th>
-                            <th>Shot<br>Taken</th>
-                            <th>Point</th>
-                            <th>Assist</th>
-                            <th>Save</th>
-                            <th>Stun</th>
-                            <th>Ping</th>
-                            <th>Lv.</th>
-                        </tr>
-                        <tr>
-                            <td class="no" id="b-no-0"></td>
-                            <td class="nm" id="b-nm-0"></td>
-                            <td class="ps" id="b-ps-0"></td>
-                            <td class="sh" id="b-sh-0"></td>
-                            <td class="pt" id="b-pt-0"></td>
-                            <td class="as" id="b-as-0"></td>
-                            <td class="sv" id="b-sv-0"></td>
-                            <td class="st" id="b-st-0"></td>
-                            <td class="pn" id="b-pn-0"></td>
-                            <td class="lv" id="b-lv-0"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="b-no-1"></td>
-                            <td class="nm" id="b-nm-1"></td>
-                            <td class="ps" id="b-ps-1"></td>
-                            <td class="sh" id="b-sh-1"></td>
-                            <td class="pt" id="b-pt-1"></td>
-                            <td class="as" id="b-as-1"></td>
-                            <td class="sv" id="b-sv-1"></td>
-                            <td class="st" id="b-st-1"></td>
-                            <td class="pn" id="b-pn-1"></td>
-                            <td class="lv" id="b-lv-1"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="b-no-2"></td>
-                            <td class="nm" id="b-nm-2"></td>
-                            <td class="ps" id="b-ps-2"></td>
-                            <td class="sh" id="b-sh-2"></td>
-                            <td class="pt" id="b-pt-2"></td>
-                            <td class="as" id="b-as-2"></td>
-                            <td class="sv" id="b-sv-2"></td>
-                            <td class="st" id="b-st-2"></td>
-                            <td class="pn" id="b-pn-2"></td>
-                            <td class="lv" id="b-lv-2"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="b-no-3"></td>
-                            <td class="nm" id="b-nm-3"></td>
-                            <td class="ps" id="b-ps-3"></td>
-                            <td class="sh" id="b-sh-3"></td>
-                            <td class="pt" id="b-pt-3"></td>
-                            <td class="as" id="b-as-3"></td>
-                            <td class="sv" id="b-sv-3"></td>
-                            <td class="st" id="b-st-3"></td>
-                            <td class="pn" id="b-pn-3"></td>
-                            <td class="lv" id="b-lv-3"></td>
-                        </tr>
-                        <tr>
-                            <td class="no" id="b-no-4"></td>
-                            <td class="nm" id="b-nm-4"></td>
-                            <td class="ps" id="b-ps-4"></td>
-                            <td class="sh" id="b-sh-4"></td>
-                            <td class="pt" id="b-pt-4"></td>
-                            <td class="as" id="b-as-4"></td>
-                            <td class="sv" id="b-sv-4"></td>
-                            <td class="st" id="b-st-4"></td>
-                            <td class="pn" id="b-pn-4"></td>
-                            <td class="lv" id="b-lv-4"></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td id="orange-points"></td>
-                <td id="blue-points"></td>
-            </tr>
-        </table>
-        <div id="map"></div>
-        <p>sessionid: <span id="sessionid"></span></p>
+      <table class="score">
+        <tr>
+          <td rowspan="3">
+            <table class="stats">
+              <tr>
+                <th><div>NO</div></th>
+                <th class="nm-td"><div>PLAYER</div></th>
+                <th><div>PTS</div></th>
+                <th><div>AST</div></th>
+                <th><div>SAV</div></th>
+                <th><div>STL</div></th>
+                <th><div>STN</div></th>
+                <th><div>POSS</div></th>
+                <th><div>ATT</div></th>
+                <th><div>PING</div></th>
+                <th><div>LV</div></th>
+              </tr>
+              <tr>
+                <td><div class="no" id="o-no-0"></div></td>
+                <td class="nm-td"><div class="nm" id="o-nm-0"></div></td>
+                <td><div class="pt" id="o-pt-0"></div></td>
+                <td><div class="as" id="o-as-0"></div></td>
+                <td><div class="sv" id="o-sv-0"></div></td>
+                <td><div class="sl" id="o-sl-0"></div></td>
+                <td><div class="st" id="o-st-0"></div></td>
+                <td><div class="ps" id="o-ps-0"></div></td>
+                <td><div class="sh" id="o-sh-0"></div></td>
+                <td><div class="pn" id="o-pn-0"></div></td>
+                <td><div class="lv" id="o-lv-0"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="o-no-1"></div></td>
+                <td class="nm-td"><div class="nm" id="o-nm-1"></div></td>
+                <td><div class="pt" id="o-pt-1"></div></td>
+                <td><div class="as" id="o-as-1"></div></td>
+                <td><div class="sv" id="o-sv-1"></div></td>
+                <td><div class="sl" id="o-sl-1"></div></td>
+                <td><div class="st" id="o-st-1"></div></td>
+                <td><div class="ps" id="o-ps-1"></div></td>
+                <td><div class="sh" id="o-sh-1"></div></td>
+                <td><div class="pn" id="o-pn-1"></div></td>
+                <td><div class="lv" id="o-lv-1"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="o-no-2"></div></td>
+                <td class="nm-td"><div class="nm" id="o-nm-2"></div></td>
+                <td><div class="pt" id="o-pt-2"></div></td>
+                <td><div class="as" id="o-as-2"></div></td>
+                <td><div class="sv" id="o-sv-2"></div></td>
+                <td><div class="sl" id="o-sl-2"></div></td>
+                <td><div class="st" id="o-st-2"></div></td>
+                <td><div class="ps" id="o-ps-2"></div></td>
+                <td><div class="sh" id="o-sh-2"></div></td>
+                <td><div class="pn" id="o-pn-2"></div></td>
+                <td><div class="lv" id="o-lv-2"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="o-no-3"></div></td>
+                <td class="nm-td"><div class="nm" id="o-nm-3"></div></td>
+                <td><div class="pt" id="o-pt-3"></div></td>
+                <td><div class="as" id="o-as-3"></div></td>
+                <td><div class="sv" id="o-sv-3"></div></td>
+                <td><div class="sl" id="o-sl-3"></div></td>
+                <td><div class="st" id="o-st-3"></div></td>
+                <td><div class="ps" id="o-ps-3"></div></td>
+                <td><div class="sh" id="o-sh-3"></div></td>
+                <td><div class="pn" id="o-pn-3"></div></td>
+                <td><div class="lv" id="o-lv-3"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="o-no-4"></div></td>
+                <td class="nm-td"><div class="nm" id="o-nm-4"></div></td>
+                <td><div class="pt" id="o-pt-4"></div></td>
+                <td><div class="as" id="o-as-4"></div></td>
+                <td><div class="sv" id="o-sv-4"></div></td>
+                <td><div class="sl" id="o-sl-4"></div></td>
+                <td><div class="st" id="o-st-4"></div></td>
+                <td><div class="ps" id="o-ps-4"></div></td>
+                <td><div class="sh" id="o-sh-4"></div></td>
+                <td><div class="pn" id="o-pn-4"></div></td>
+                <td><div class="lv" id="o-lv-4"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="o-no-t"></div></td>
+                <td class="nm-td"><div class="nm" id="o-nm-t"></div></td>
+                <td><div class="pt" id="o-pt-t"></div></td>
+                <td><div class="as" id="o-as-t"></div></td>
+                <td><div class="sv" id="o-sv-t"></div></td>
+                <td><div class="sl" id="o-sl-t"></div></td>
+                <td><div class="st" id="o-st-t"></div></td>
+                <td><div class="ps" id="o-ps-t"></div></td>
+                <td><div class="sh" id="o-sh-t"></div></td>
+                <td><div class="pn" id="o-pn-t"></div></td>
+                <td><div class="lv" id="o-lv-t"></div></td>
+              </tr>
+            </table>
+          </td>
+          <td id="game-clock-display" colspan="2"></td>
+          <td rowspan="3">
+            <table class="stats">
+              <tr>
+                <th><div>NO</div></th>
+                <th><div>PLAYER</div></th>
+                <th><div>PTS</div></th>
+                <th><div>AST</div></th>
+                <th><div>SAV</div></th>
+                <th><div>STL</div></th>
+                <th><div>STN</div></th>
+                <th><div>POSS</div></th>
+                <th><div>ATT</div></th>
+                <th><div>PING</div></th>
+                <th><div>LV</div></th>
+              </tr>
+              <tr>
+                <td><div class="no" id="b-no-0"></div></td>
+                <td><div class="nm" id="b-nm-0"></div></td>
+                <td><div class="pt" id="b-pt-0"></div></td>
+                <td><div class="as" id="b-as-0"></div></td>
+                <td><div class="sv" id="b-sv-0"></div></td>
+                <td><div class="sl" id="b-sl-0"></div></td>
+                <td><div class="st" id="b-st-0"></div></td>
+                <td><div class="ps" id="b-ps-0"></div></td>
+                <td><div class="sh" id="b-sh-0"></div></td>
+                <td><div class="pn" id="b-pn-0"></div></td>
+                <td><div class="lv" id="b-lv-0"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="b-no-1"></div></td>
+                <td><div class="nm" id="b-nm-1"></div></td>
+                <td><div class="pt" id="b-pt-1"></div></td>
+                <td><div class="as" id="b-as-1"></div></td>
+                <td><div class="sv" id="b-sv-1"></div></td>
+                <td><div class="sl" id="b-sl-1"></div></td>
+                <td><div class="st" id="b-st-1"></div></td>
+                <td><div class="ps" id="b-ps-1"></div></td>
+                <td><div class="sh" id="b-sh-1"></div></td>
+                <td><div class="pn" id="b-pn-1"></div></td>
+                <td><div class="lv" id="b-lv-1"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="b-no-2"></div></td>
+                <td><div class="nm" id="b-nm-2"></div></td>
+                <td><div class="pt" id="b-pt-2"></div></td>
+                <td><div class="as" id="b-as-2"></div></td>
+                <td><div class="sv" id="b-sv-2"></div></td>
+                <td><div class="sl" id="b-sl-2"></div></td>
+                <td><div class="st" id="b-st-2"></div></td>
+                <td><div class="ps" id="b-ps-2"></div></td>
+                <td><div class="sh" id="b-sh-2"></div></td>
+                <td><div class="pn" id="b-pn-2"></div></td>
+                <td><div class="lv" id="b-lv-2"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="b-no-3"></div></td>
+                <td><div class="nm" id="b-nm-3"></div></td>
+                <td><div class="pt" id="b-pt-3"></div></td>
+                <td><div class="as" id="b-as-3"></div></td>
+                <td><div class="sv" id="b-sv-3"></div></td>
+                <td><div class="sl" id="b-sl-3"></div></td>
+                <td><div class="st" id="b-st-3"></div></td>
+                <td><div class="ps" id="b-ps-3"></div></td>
+                <td><div class="sh" id="b-sh-3"></div></td>
+                <td><div class="pn" id="b-pn-3"></div></td>
+                <td><div class="lv" id="b-lv-3"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="b-no-4"></div></td>
+                <td><div class="nm" id="b-nm-4"></div></td>
+                <td><div class="pt" id="b-pt-4"></div></td>
+                <td><div class="as" id="b-as-4"></div></td>
+                <td><div class="sv" id="b-sv-4"></div></td>
+                <td><div class="sl" id="b-sl-4"></div></td>
+                <td><div class="st" id="b-st-4"></div></td>
+                <td><div class="ps" id="b-ps-4"></div></td>
+                <td><div class="sh" id="b-sh-4"></div></td>
+                <td><div class="pn" id="b-pn-4"></div></td>
+                <td><div class="lv" id="b-lv-4"></div></td>
+              </tr>
+              <tr>
+                <td><div class="no" id="b-no-t"></div></td>
+                <td><div class="nm" id="b-nm-t"></div></td>
+                <td><div class="pt" id="b-pt-t"></div></td>
+                <td><div class="as" id="b-as-t"></div></td>
+                <td><div class="sv" id="b-sv-t"></div></td>
+                <td><div class="sl" id="b-sl-t"></div></td>
+                <td><div class="st" id="b-st-t"></div></td>
+                <td><div class="ps" id="b-ps-t"></div></td>
+                <td><div class="sh" id="b-sh-t"></div></td>
+                <td><div class="pn" id="b-pn-t"></div></td>
+                <td><div class="lv" id="b-lv-t"></div></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td id="orange-points"></td>
+          <td id="blue-points"></td>
+        </tr>
+        <tr>
+          <td id="orange-points-round"></td>
+          <td id="blue-points-round"></td>
+        </tr>
+      </table>
+      <div id="map"></div>
+      <p>sessionid: <span id="sessionid"></span></p>
     </div>
-</body>
+  </body>
 </html>
