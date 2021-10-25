@@ -77,8 +77,10 @@ function renderScoreborad(sessionData) {
 
   const sessionid = sessionData.sessionid;
   replaceText('sessionid', sessionid);
-  replaceText('orange-points-round', sessionData.orange_round_score);
-  replaceText('blue-points-round', sessionData.blue_round_score);
+  if (sessionData.orange_round_score !== undefined)
+    replaceText('orange-points-round', sessionData.orange_round_score);
+  if (sessionData.blue_round_score !== undefined)
+    replaceText('blue-points-round', sessionData.blue_round_score);
 
   const game_status = sessionData.game_status;
   if (
